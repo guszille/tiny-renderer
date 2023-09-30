@@ -6,9 +6,10 @@
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 
 #include "libs/image.h"
+#include "libs/model.h"
 
-const int IMAGE_WIDTH  = 100;
-const int IMAGE_HEIGHT = 100;
+const int IMAGE_WIDTH  = 800;
+const int IMAGE_HEIGHT = 800;
 
 void draw_line(int x0, int y0, int x1, int y1, Image& image, const Color& color)
 {
@@ -58,13 +59,28 @@ void draw_line(int x0, int y0, int x1, int y1, Image& image, const Color& color)
 int main(int argc, char** argv)
 {
     Image image(IMAGE_WIDTH, IMAGE_HEIGHT, Color::Format::RGB);
+    Model model("resources/models/human_head.obj");
 
-    draw_line(13, 20, 80, 40, image, WHITE);
-    draw_line(20, 13, 40, 80, image, RED);
-    draw_line(80, 40, 13, 20, image, RED);
+    for (int i = 0; i < model.get_nof_faces(); i++)
+    {
+        std::vector<int> face = model.get_face(i);
+
+        for (int j = 0; j < 3; j++)
+        {
+            Vec3f v0 = model.get_vertex(face[j]);
+            Vec3f v1 = model.get_vertex(face[(j + 1) % 3]);
+
+            int x0 = (int)((v0.x + 1.0f) * IMAGE_WIDTH  / 2.0f);
+            int y0 = (int)((v0.y + 1.0f) * IMAGE_HEIGHT / 2.0f);
+            int x1 = (int)((v1.x + 1.0f) * IMAGE_WIDTH  / 2.0f);
+            int y1 = (int)((v1.y + 1.0f) * IMAGE_HEIGHT / 2.0f);
+
+            draw_line(x0, y0, x1, y1, image, WHITE);
+        }
+    }
 
     image.flip_vertically();
-    image.write_on_disk("outputs/image.tga", Image::FileFormat::TGA);
+    image.write_on_disk("outputs/wireframe.tga", Image::FileFormat::TGA);
 
     return 0;
 }

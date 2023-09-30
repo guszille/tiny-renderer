@@ -128,10 +128,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="application.cpp" />
+    <ClCompile Include="libs\geometry.cpp" />
     <ClCompile Include="libs\image.cpp" />
+    <ClCompile Include="libs\model.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="libs\geometry.h" />
     <ClInclude Include="libs\image.h" />
+    <ClInclude Include="libs\model.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
