@@ -36,6 +36,9 @@ public:
 	void flip_vertically();
 	void write_on_disk(const char* filename, FileFormat format);
 
+	int get_width();
+	int get_height();
+
 private:
 	unsigned char* data;
 	int width, height, channels;

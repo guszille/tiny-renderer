@@ -45,7 +45,7 @@ Model::Model(const char* filename)
         }
     }
 
-    std::cerr << "# v# " << vertices.size() << " f# " << faces.size() << std::endl;
+    std::cerr << "> v# " << vertices.size() << " f# " << faces.size() << std::endl;
 }
 
 int Model::get_nof_vertices()

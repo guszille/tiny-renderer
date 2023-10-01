@@ -57,9 +57,20 @@ void Image::write_on_disk(const char* filename, FileFormat format)
 
 	case FileFormat::JPG:
 		stbi_write_jpg(filename, width, height, channels, data, 100);
+		break;
 
 	default:
 		std::cout << "Unsupported image file format!" << std::endl;
 		break;
 	}
+}
+
+int Image::get_width()
+{
+	return width;
+}
+
+int Image::get_height()
+{
+	return height;
 }

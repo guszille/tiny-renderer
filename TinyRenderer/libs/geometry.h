@@ -19,6 +19,9 @@ template <class t> struct Vec2
 	inline Vec2<t> operator -(const Vec2<t>& p) const { return Vec2<t>(u - p.u, v - p.v); }
 	inline Vec2<t> operator *(float f)			const { return Vec2<t>(u * f, v * f); }
 
+	t& operator[](unsigned int i) { return raw[i]; }
+	const t& operator[](unsigned int i) const { return raw[i]; }
+
 	template <class> friend std::ostream& operator<<(std::ostream& s, Vec2<t>& v);
 };
 
@@ -43,7 +46,10 @@ template <class t> struct Vec3
 	float norm() const { return std::sqrt(x * x + y * y + z * z); }
 	Vec3<t>& normalize(t l = 1) { *this = (*this) * (l / norm()); return *this; }
 
-	template <class > friend std::ostream& operator<<(std::ostream& s, Vec3<t>& v);
+	t& operator[](unsigned int i) { return raw[i]; }
+	const t& operator[](unsigned int i) const { return raw[i]; }
+
+	template <class> friend std::ostream& operator<<(std::ostream& s, Vec3<t>& v);
 };
 
 typedef Vec2<int>   Vec2i;
